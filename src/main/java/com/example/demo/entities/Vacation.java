@@ -7,23 +7,32 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "countries")
+@Table(name = "vacations")
 @Getter
 @Setter
-
-public class Country {
+public class Vacation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
+    @Column(name = "vacation_id")
     private Long id;
 
-    @Column(name = "country")
-    private String country_name;
+    @Column(name = "vacation_title")
+    private String vacation_title;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "travel_fare_price")
+    private BigDecimal travel_price;
+
+    @Column(name = "image_url")
+    private String image_URL;
 
     @Column(name = "create_date")
     @CreationTimestamp
@@ -33,6 +42,9 @@ public class Country {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-    private Set<Division> divisions;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation")
+    private Set<Excursion> excursions;
+
+
+
 }

@@ -7,23 +7,20 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "countries")
+@Table(name = "cart_items")
 @Getter
 @Setter
 
-public class Country {
-
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
+    @Column(name = "cart_item_id")
     private Long id;
-
-    @Column(name = "country")
-    private String country_name;
 
     @Column(name = "create_date")
     @CreationTimestamp
@@ -33,6 +30,15 @@ public class Country {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-    private Set<Division> divisions;
+
+    @ManyToMany
+    @JoinTable(name = "excursion_cartitem",
+    joinColumns = @JoinColumn(name = "cart_item_id"),
+    inverseJoinColumns = @JoinColumn(name = "excursion_id"))
+    private Set<Excursion> excursions;
+
+    @Column(name = "cart_id")
+    private BigInteger cart;
+
+
 }

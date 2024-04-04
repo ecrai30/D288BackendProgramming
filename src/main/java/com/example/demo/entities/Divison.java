@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Set;
 
@@ -29,8 +30,9 @@ public class Divison {
     private Date last_update;
 
     @Column(name = "country_id")
-    private Long country_id;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy =  "category")
+    private BigInteger country_id;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy =  "division")
     private Set<Customer> customers;
 
 
