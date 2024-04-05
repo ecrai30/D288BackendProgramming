@@ -31,7 +31,7 @@ public class Divison {
 
 
     //Define one-to-many relationship for Customer
-    @OneToMany(cascade = CascadeType.ALL, mappedBy =  "division")
+    @OneToMany(mappedBy =  "division")
     private Set<Customer> customers;
 
     //Define many-to-one relationship for Country

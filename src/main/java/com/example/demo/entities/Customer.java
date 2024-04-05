@@ -48,8 +48,8 @@ public class Customer {
     private Set<Cart> carts;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customers;
+    @JoinColumn(name = "division_id")
+    private Divison division;
 
 
 
