@@ -33,6 +33,10 @@ public class Cart
     @Column(name = "party_size")
     private int party_size;
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private StatusType status;
+
     @Column(name = "create_date")
     @CreationTimestamp
     private Date create_date;
@@ -41,11 +45,15 @@ public class Cart
     @UpdateTimestamp
     private Date last_update;
 
-    @Column(name = "customer_id")
-    private BigInteger customer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
     private Set<CartItem> cartItem;
+
+    //Define the many-to-one relationship with Customer
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
 
 
 

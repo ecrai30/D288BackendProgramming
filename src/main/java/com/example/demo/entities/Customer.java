@@ -44,12 +44,12 @@ public class Customer {
     @UpdateTimestamp
     private Date last_update;
 
-    @Column(name = "customer_id")
-    private BigInteger customer;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy =  "customer")
     private Set<Cart> carts;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customers;
 
 
 

@@ -30,15 +30,18 @@ public class CartItem {
     @UpdateTimestamp
     private Date last_update;
 
-
+    //Define the many-to-many relationship with excursion
     @ManyToMany
     @JoinTable(name = "excursion_cartitem",
     joinColumns = @JoinColumn(name = "cart_item_id"),
     inverseJoinColumns = @JoinColumn(name = "excursion_id"))
     private Set<Excursion> excursions;
 
-    @Column(name = "cart_id")
-    private BigInteger cart;
+    //Define the many-to-one relationship with Cart
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
 
 
 }

@@ -40,12 +40,20 @@ public class Excursion {
     @UpdateTimestamp
     private Date last_update;
 
-    @Column(name = "vacation_id")
-    private BigInteger vacation;
-
+    //Define the many-to-many relationship with cartItem
     @ManyToMany
     @JoinTable(name = "excursion_cartitem",
             joinColumns = @JoinColumn(name = "excursion_id"),
             inverseJoinColumns = @JoinColumn(name = "cart_item_id"))
     private Set<CartItem> cartitems;
+
+
+
+    //Define the many-to-one relationship with Vacation
+    @ManyToOne
+    @JoinColumn(name = "vacation_id")
+    private Vacation vacation;
+
 }
+
+

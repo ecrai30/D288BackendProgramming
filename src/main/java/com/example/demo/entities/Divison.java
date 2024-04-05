@@ -29,11 +29,15 @@ public class Divison {
     @Column(name = "last_update")
     private Date last_update;
 
-    @Column(name = "country_id")
-    private BigInteger country_id;
 
+    //Define one-to-many relationship for Customer
     @OneToMany(cascade = CascadeType.ALL, mappedBy =  "division")
     private Set<Customer> customers;
+
+    //Define many-to-one relationship for Country
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
 
 }
