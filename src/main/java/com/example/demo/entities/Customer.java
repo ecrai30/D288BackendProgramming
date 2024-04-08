@@ -52,5 +52,6 @@ public class Customer {
     private Divison division;
 
 
-
+    public void add(Cart cart) {
+    }
 }
