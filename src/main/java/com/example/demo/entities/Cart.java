@@ -55,6 +55,6 @@ public class Cart
     private Customer customer;
 
 
-
-
+    public void add(CartItem item) {
+    }
 }
