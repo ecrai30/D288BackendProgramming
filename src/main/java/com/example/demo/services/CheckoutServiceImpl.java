@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 
+import com.example.demo.dao.CartRepository;
 import com.example.demo.dao.CustomerRepository;
 import com.example.demo.entities.Cart;
 import com.example.demo.entities.CartItem;
@@ -8,17 +9,22 @@ import com.example.demo.entities.Customer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Set;
 import java.util.UUID;
+
+import static com.example.demo.entities.StatusType.ordered;
 
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
 
     private CustomerRepository customerRepository;
+    private CartRepository cartRepository;
 
-    public CheckoutServiceImpl(CustomerRepository customerRepository){
+    public CheckoutServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository){
         this.customerRepository = customerRepository;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -26,12 +32,15 @@ public class CheckoutServiceImpl implements CheckoutService {
     public PurchaseResponse placeOrder(Purchase purchase) {
         // retrieve the order information
         Cart cart = purchase.getCart();
+
         //generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
+
         //populate cart with cartItems
         Set<CartItem> cartItems =purchase.getCartItems();
         cartItems.forEach(item -> cart.add(item));
+
         // populate customer with order
         Customer customer = purchase.getCustomer();
         customer.add(cart);
@@ -39,13 +48,15 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         //save to the database
         customerRepository.save(customer);
+        cartRepository.save(cart);
+        cart.setStatus(ordered);
+
         //return a response
         return new PurchaseResponse(orderTrackingNumber);
-        return null;
     }
-    private String generateOrderTrackingNumber)(){
+    private String generateOrderTrackingNumber(){
 
-    //generate a random UUID numebr(UUID version -4)
+    //generate a random UUID number(UUID version -4)
         return UUID.randomUUID().toString();
     }
 }
