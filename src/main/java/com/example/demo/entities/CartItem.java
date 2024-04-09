@@ -42,6 +42,11 @@ public class CartItem {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    //Define the many-to-one relationship with Vacation
+    @ManyToOne
+    @JoinColumn(name = "vacation_id")
+    private Vacation vacation;
+
 
 
 }

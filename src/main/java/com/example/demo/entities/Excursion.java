@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "excurions")
+@Table(name = "excursions")
 @Getter
 @Setter
 
@@ -47,7 +47,6 @@ public class Excursion {
             joinColumns = @JoinColumn(name = "excursion_id"),
             inverseJoinColumns = @JoinColumn(name = "cart_item_id"))
     private Set<CartItem> cartitems;
-
 
 
     //Define the many-to-one relationship with Vacation
