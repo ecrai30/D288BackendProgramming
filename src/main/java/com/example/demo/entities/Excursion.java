@@ -23,8 +23,9 @@ public class Excursion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "excursion_id")
     private Long id;
+
     @Column(name = "excursion_title")
-    private String excursison_title;
+    private String excursion_title;
 
     @Column(name = "excursion_price")
     private BigDecimal excursion_price;
