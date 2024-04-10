@@ -31,13 +31,20 @@ public class Division {
 
 
     //Define one-to-many relationship for Customer
-    @OneToMany(mappedBy =  "division")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy =  "division")
     private Set<Customer> customers;
 
     //Define many-to-one relationship for Country
-    @ManyToOne
-    @JoinColumn(name = "country_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
+    //Fix for front end not population divisions
+    @Column(name = "country_id")
+    private long country_id;
+    public void setCountry(Country country){
+        setCountry_id(country.getId());
+        this.country = country;
+    }
 
 }
