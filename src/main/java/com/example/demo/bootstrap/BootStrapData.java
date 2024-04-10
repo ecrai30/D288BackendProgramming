@@ -21,20 +21,50 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-       /** Divison division1 = divisionRepository.findById(1L).orElse(null);
-        division1.setId(1L);
-        division1.setDivision_name("Test");
-        division1.setCountry("USA");
-        DivisionRepository.save(division1);
-    */
-       Division division1 = new Division();
+    //Divisions
+    Division division = divisionRepository.findById(7L).orElse(null);
 
-        Customer melissa = new Customer("Melissa","Craig", "342 Shelton Lane","45679", "1235467890");
-        melissa.getId().add(division1);
-        CustomerRepository.save(melissa);
+    //Customers
+    Customer melissa = new Customer();
+    melissa.setFirstName("Melissa");
+    melissa.setLastName("Craig");
+    melissa.setAddress("342 Shelton Lane");
+    melissa.setPostal_code("36598");
+    melissa.setPhone("2569847516");
+    melissa.setDivision(division);
+    customerRepository.save(melissa);
 
+    Customer leticia = new Customer();
+    leticia.setFirstName("Leticia");
+    leticia.setLastName("Marcela");
+    leticia.setAddress("342 Brazil Lane");
+    leticia.setPostal_code("26598");
+    leticia.setPhone("2569877516");
+    customerRepository.save(leticia);
 
-        System.out.println(CustomerRepository.findAll());
+    Customer christina = new Customer();
+    christina.setFirstName("Christina");
+    christina.setLastName("Craig");
+    christina.setAddress("342 Mills Lane");
+    christina.setPostal_code("36498");
+    christina.setPhone("2569847556");
+    customerRepository.save(christina);
+
+    Customer richard = new Customer();
+    richard.setFirstName("Richard");
+    richard.setLastName("Craig");
+    richard.setAddress("342 Lowry Lane");
+    richard.setPostal_code("36098");
+    richard.setPhone("2569847514");
+    customerRepository.save(richard);
+
+    Customer victor = new Customer();
+    victor.setFirstName("Victor");
+    victor.setLastName("Craig");
+    victor.setAddress("342 Mills Lane");
+    victor.setPostal_code("34598");
+    victor.setPhone("2569647516");
+    customerRepository.save(victor);
 
 
     }
