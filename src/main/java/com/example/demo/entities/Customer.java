@@ -49,9 +49,18 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "division_id")
-    private Divison division;
+    private Division division;
 
 
     public void add(Cart cart) {
+    }
+
+    public Customer(String firstName, String lastName, String address, String postal_code, String phone){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.postal_code = postal_code;
+        this.phone = phone;
+        //this.division = division;
     }
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Divison {
+public class Division {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
