@@ -53,10 +53,9 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         //Checks to see if cart is empty and return a response
         if (purchase.getCartItems().isEmpty()) {
-            return new PurchaseResponse("Cart is Empty");
+            return new PurchaseResponse("Cart is Empty!");
         }
         else{
-
             return new PurchaseResponse(orderTrackingNumber);
         }
 
