@@ -47,9 +47,8 @@ public class CheckoutServiceImpl implements CheckoutService {
 
 
         //save to the database
-        customerRepository.save(customer);
-        cartRepository.save(cart);
         cart.setStatus(ordered);
+        cartRepository.save(cart);
 
         //Checks to see if cart is empty and return a response
         if (purchase.getCartItems().isEmpty()) {
