@@ -3,10 +3,12 @@ package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,6 +24,8 @@ public class Country {
     @Column(name = "country_id")
     private Long id;
 
+    @NonNull
+    @NotEmpty
     @Column(name = "country")
     private String country_name;
 

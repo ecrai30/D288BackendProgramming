@@ -3,10 +3,12 @@ package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -31,6 +33,8 @@ public class Cart
     @Column(name = "package_price")
     private BigDecimal package_price;
 
+    @NonNull
+    @NotEmpty
     @Column(name = "party_size")
     private int party_size;
 
