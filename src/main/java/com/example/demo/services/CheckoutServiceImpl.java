@@ -7,6 +7,7 @@ import com.example.demo.entities.Cart;
 import com.example.demo.entities.CartItem;
 import com.example.demo.entities.Customer;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
@@ -15,14 +16,16 @@ import java.util.UUID;
 
 import static com.example.demo.entities.StatusType.ordered;
 
-@Service
+@Component
 public class CheckoutServiceImpl implements CheckoutService {
+
 
 
     private CustomerRepository customerRepository;
     private CartRepository cartRepository;
 
     public CheckoutServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository){
+
         this.customerRepository = customerRepository;
         this.cartRepository = cartRepository;
     }
@@ -37,6 +40,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
 
+
         //populate cart with cartItems
         Set<CartItem> cartItems =purchase.getCartItems();
         cartItems.forEach(item -> cart.add(item));
@@ -45,6 +49,10 @@ public class CheckoutServiceImpl implements CheckoutService {
         Customer customer = purchase.getCustomer();
         customer.add(cart);
 
+        // Validate party size is greater than zero.
+        if(cart.getParty_size() <=0 ){
+            return new PurchaseResponse("Party size must be greater than zero.");
+        }
 
         //save to the database
         cart.setStatus(ordered);
@@ -56,7 +64,10 @@ public class CheckoutServiceImpl implements CheckoutService {
         }
         else{
             return new PurchaseResponse(orderTrackingNumber);
+
         }
+
+
 
 
 
@@ -66,4 +77,8 @@ public class CheckoutServiceImpl implements CheckoutService {
     //generate a random UUID number(UUID version -4)
         return UUID.randomUUID().toString();
     }
+
+
+
+
 }
